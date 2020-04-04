@@ -29,6 +29,8 @@ export class AddDispensaryComponent implements OnInit {
   public uploadedFilePath   : string = null;
   public uploadAPI          = `${environment.apiUrl}/dispensary/add/image`;
 
+  public user: string;
+
   imageTitle = 'budsbankadminpanel';
   public uploader: FileUploader = new FileUploader({
     'url'           : this.uploadAPI,
@@ -63,6 +65,10 @@ export class AddDispensaryComponent implements OnInit {
     private ngZone: NgZone) { }
   
   ngOnInit() {
+
+    let admin = JSON.parse(localStorage.getItem('userInfo')); console.log(admin);
+    this.user = admin['name'];
+
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
