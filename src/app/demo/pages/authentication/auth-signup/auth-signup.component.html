@@ -18,7 +18,7 @@
                   with our growing community!</h3>
                 <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit(registerForm)" #myform="ngForm" method="POST">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Account Managerial Email" formControlName="email"
+                    <input type="text" class="form-control" placeholder="Account Manager Email Address" formControlName="email"
                       required>
                       <div class="input-group error-div">
                         <small *ngIf="registerForm.get('email').hasError('required') && myform.submitted">Email
