@@ -1,5 +1,4 @@
 _#!/bin/bash_
 
-cd /app/backend/back/ 
-pm2 delete backend   
-pm2 start --name backend index.js
+cd /app/frontend/front/ 
+cp -a dist/ng-datta-able/* /var/www/html/angular
