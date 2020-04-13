@@ -219,7 +219,7 @@ export class AddDispensaryComponent implements OnInit {
               if(response){ 
                 var formatedResponse = JSON.parse(response); 
                 if (formatedResponse['status'] === 200){
-                  swal.fire('Success', "Dispensary Added Successfully", 'success').then((result) => {
+                  swal.fire('Success', "Listing Added Successfully", 'success').then((result) => {
                     let admin = JSON.parse(localStorage.getItem('userInfo'));
                     if(admin.role === 1){
                       this.router.navigateByUrl(`/admin/dispensary/${addResponse['data'].dispensaryId}`);

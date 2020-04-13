@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xl-12">
-      <app-card cardTitle="Disabled Dispensaries" [options]="false">
+      <app-card cardTitle="Disabled Listings" [options]="false">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
@@ -8,11 +8,10 @@
               <!-- <th>#</th> -->
               <th>Title</th>
               <th>Featured</th>
-              <th>Phone</th>
+              <th>Phone</th>              
+              <th>Address</th>
               <th>Code</th>
-              <th>Longitude</th>
-              <th>Latitude</th>
-              <th class="text-right">Actions</th>
+              <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -25,17 +24,16 @@
               <td *ngIf="dispensaries.featured == 'false'">
                 <a href="javascript:" class="badge badge-primary theme-bg2 text-white f-12">Normal</a>
               </td>
-              <td>{{ dispensaries.phone }}</td>
+              <td>{{ dispensaries.phone }}</td>              
+              <td>{{ dispensaries.address }}</td>
               <td>{{ dispensaries.code }}</td>
-              <td>{{ dispensaries.longitude }}</td>
-              <td>{{ dispensaries.latitude }}</td>
-              <td class="text-right">
-                <a (click)="viewDispensary(dispensaries.id)"><i class="feather icon-eye text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="View Dispensary"></i></a>
-                <a (click)="editDispensary(dispensaries.id)"><i class="feather icon-edit text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="Edit Dispensary"></i></a>
+              <td>
+                <a (click)="viewDispensary(dispensaries.id)"><i class="feather icon-eye text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="View Listing"></i></a>
+                <a (click)="editDispensary(dispensaries.id)"><i class="feather icon-edit text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="Edit Listing"></i></a>
                 <a 
                   (click)="activateDispensaryPopup(dispensaries.id)"
                 >
-                  <i class="feather icon-check text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="Active Dispensary"></i></a>
+                  <i class="feather icon-check text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="Active Listing"></i></a>
               </td>
             </tr>
             </tbody>

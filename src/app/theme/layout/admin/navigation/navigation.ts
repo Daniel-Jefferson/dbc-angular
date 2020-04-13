@@ -82,13 +82,13 @@ NavigationItems = [
   {
     id: 'dispensaries',
     hidden: (user && user.role === 1 ? false: true),
-    title: 'Dispensaries',
+    title: 'Listings',
     type: 'collapse',
     icon: 'feather icon-help-circle',
     children: [
       {
         id: 'add-dispensary',
-        title: 'Add Dispensary',
+        title: 'Add Listing',
         type: 'item',
         url: '/admin/dispensary/add',
         icon: 'feather icon-file-text',
@@ -96,7 +96,7 @@ NavigationItems = [
       },
       {
         id: 'dispensaries-list',
-        title: 'Dispensaries List',
+        title: 'Active Listings',
         type: 'item',
         url: '/admin/dispensary/all',
         icon: 'feather icon-server',
@@ -104,7 +104,7 @@ NavigationItems = [
       },
       {
         id: 'dispensaries-disabled',
-        title: 'Disabled Dispensaries',
+        title: 'Disabled Listings',
         type: 'item',
         url: '/admin/dispensary/disabled',
         icon: 'feather icon-server',
@@ -173,13 +173,13 @@ NavigationItems = [
   {
     id: 'dispensaries',
     hidden: (user && user.role === 2 ? false: true),
-    title: 'Dispensaries',
+    title: 'Listings',
     type: 'collapse',
     icon: 'feather icon-help-circle',
     children: [
       {
         id: 'add-dispensary',
-        title: 'Add Dispensary',
+        title: 'Add Listing',
         type: 'item',
         url: '/admin/dispensary/add',
         icon: 'feather icon-file-text',
@@ -195,7 +195,7 @@ NavigationItems = [
       // },
       {
         id: 'dispensaries-list',
-        title: 'Dispensaries List',
+        title: 'Active Listings',
         type: 'item',
         url: '/admin/dispensary/all',
         icon: 'feather icon-server',
@@ -203,7 +203,7 @@ NavigationItems = [
       },
       {
         id: 'dispensaries-disabled',
-        title: 'Disabled Dispensaries',
+        title: 'Disabled Listings',
         type: 'item',
         url: '/admin/dispensary/disabled',
         icon: 'feather icon-server',

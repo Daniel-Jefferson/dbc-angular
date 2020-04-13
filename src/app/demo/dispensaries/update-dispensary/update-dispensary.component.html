@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <app-card cardTitle="Update Dispensary" [options]="false">
+            <app-card cardTitle="Update Listing" [options]="false">
                 <label>Enter address<span class="mandatory">*</span></label>
                 <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" value="{{showAddress}}" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
                 <agm-map 
@@ -50,8 +50,8 @@
                             </div>
                         </div>
 
-                        <img *ngIf="dispensaryImage !== null" class="img-fluid img-thumbnail img-rounded" src="{{dispensaryImage}}" alt="Dispensary profile image" width="250" height="250">
-                        <img *ngIf="dispensaryImage === null" class="img-fluid img-thumbnail img-rounded" src="assets/images/admin-user-demo.png" alt="Dispensary profile image" width="250" height="250">
+                        <img *ngIf="dispensaryImage !== null" class="img-fluid img-thumbnail img-rounded" src="{{dispensaryImage}}" alt="Listing profile image" width="250" height="250">
+                        <img *ngIf="dispensaryImage === null" class="img-fluid img-thumbnail img-rounded" src="assets/images/admin-user-demo.png" alt="Listing profile image" width="250" height="250">
 
                         <div class="form-group">
                             <label>Image<span class="mandatory">*</span></label>
@@ -139,7 +139,7 @@
                         <div class="form-group">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" value="false" class="custom-control-input" formControlName="featured" id="customControlValidation1">
-                                <label class="custom-control-label" for="customControlValidation1">Featured Dispensary</label>
+                                <label class="custom-control-label" for="customControlValidation1">Featured Listing</label>
                             </div>
                         </div>
                     </div>

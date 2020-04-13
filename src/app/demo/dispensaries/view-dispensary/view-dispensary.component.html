@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-xl-12">
-        <app-card cardTitle="Dispensary Profile" [options]="false">
+        <app-card cardTitle="Listing Profile" [options]="false">
             <div class="row" *ngIf="dispensaryProfile">
                 <div class="col-md-6" >
                     <h4 class="mb-4 blue" id="basic-info-heading">Profile Image</h4>
-                    <img *ngIf="dispensaryProfile.image !== null" class="img-fluid img-thumbnail img-rounded" src="{{dispensaryProfile.image}}" alt="Dispensary profile image" width="250" height="250">
-                    <img *ngIf="dispensaryProfile.image === null" class="img-fluid img-thumbnail img-rounded" src="assets/images/admin-user-demo.png" alt="Dispensary profile image" width="250" height="250">
+                    <img *ngIf="dispensaryProfile.image !== null" class="img-fluid img-thumbnail img-rounded" src="{{dispensaryProfile.image}}" alt="Listing profile image" width="250" height="250">
+                    <img *ngIf="dispensaryProfile.image === null" class="img-fluid img-thumbnail img-rounded" src="assets/images/admin-user-demo.png" alt="Listing profile image" width="250" height="250">
                 
                     <div class="map-container">
                         <h4 class="mb-4" id="basic-info-heading">Map Location</h4>
@@ -29,14 +29,6 @@
                             <tr>
                                 <td><b>Title:</b></td>
                                 <td>{{dispensaryProfile.name}}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Longitude:</b></td>
-                                <td>{{dispensaryProfile.longitude}}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Latitude:</b></td>
-                                <td>{{dispensaryProfile.latitude}}</td>
                             </tr>
                             <tr>
                                 <td><b>Phone:</b></td>
@@ -84,7 +76,7 @@
                 </div>
             </div>
             <!-- <div class="row text-center" *ngIf="!dispensaryProfile">
-                <h1>No Dispensary Available</h1>
+                <h1>No Listing Available</h1>
             </div> -->
         </app-card>
     </div>

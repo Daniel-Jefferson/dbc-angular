@@ -78,7 +78,7 @@ export class DisabledDispensariesComponent implements OnInit {
   
     this.dispensaries.activateDispensary(data).then(response => {
       if (response['status'] === 200){
-        swal.fire('Success', 'Dispensary Activated Successfully', 'success');
+        swal.fire('Success', 'Listing Activated Successfully', 'success');
         if (this.allDispensaries !== undefined){
           var size = Object.keys(this.allDispensaries).length;
           if (size == 1){

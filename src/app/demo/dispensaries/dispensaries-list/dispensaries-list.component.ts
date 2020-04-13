@@ -89,7 +89,7 @@ export class DispensariesListComponent implements OnInit {
         swal.fire({
           icon: "success",
           title: "success",
-          text: "Dispensary disabled successfully",
+          text: "Listing disabled successfully",
           showCancelButton: true,
         })
         this.loadActiveDispensaries(this.pageNumber, this.pageSize, this.userID);

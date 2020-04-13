@@ -51,7 +51,7 @@ export class ViewDispensaryComponent implements OnInit {
             }
           }else{
             console.log(response);
-            // swal.fire('Error', 'No Dispensary Added Yet', 'error');
+            // swal.fire('Error', 'No Listing Added Yet', 'error');
           }
         })
       }

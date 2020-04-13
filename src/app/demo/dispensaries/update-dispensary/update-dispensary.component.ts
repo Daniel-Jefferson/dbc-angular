@@ -275,7 +275,7 @@ export class UpdateDispensaryComponent implements OnInit {
               }
             }
           }
-          swal.fire('Success', "Dispensary Updated Successfully", 'success').then((result) => {
+          swal.fire('Success', "Listing Updated Successfully", 'success').then((result) => {
             let admin = JSON.parse(localStorage.getItem('userInfo'));
             // if(admin.role === 1){
               this.router.navigateByUrl(`/admin/dispensary/${updateResponse['data'].dispensaryId}`);

@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <app-card cardTitle="Add Dispensary" [options]="false">
-                <label>Enter address<span class="mandatory">*</span></label>
+            <app-card cardTitle="Add Listing" [options]="false">
+                <label>Business Address<span class="mandatory">*</span></label>
                 <input type="text" class="form-control" id="mapAdd" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" value="{{showAddress}}" spellcheck="off" type="text" #search>
                 <agm-map 
                     [latitude]="mapLatitude" 
@@ -19,10 +19,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Title<span class="mandatory">*</span></label>
-                            <input type="text" formControlName="name" class="form-control" aria-describedby="Username" placeholder="Enter Title" required>
+                            <label>Business Name<span class="mandatory">*</span></label>
+                            <input type="text" formControlName="name" class="form-control" aria-describedby="Username" placeholder="Business Name" required>
                             <div class="mb-3 error-div">
-                                <small *ngIf="addDispensaryForm.get('name').hasError('required') && myform.submitted">Title Required</small>
+                                <small *ngIf="addDispensaryForm.get('name').hasError('required') && myform.submitted">Business Name Required</small>
                             </div>
                         </div>
                         
@@ -51,8 +51,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Image<span class="mandatory">*</span></label>
-                            <input type="file" formControlName="image" class="form-control" aria-describedby="Image" (change)="fileProgress($event)" ng2FileSelect [uploader]="uploader" accept="image/*">
+                            <label>Listing Photo<span class="mandatory">*</span></label>
+                            <input type="file" formControlName="image" class="form-control" aria-describedby="Listing Photo" (change)="fileProgress($event)" ng2FileSelect [uploader]="uploader" accept="image/*">
                             <div class="mb-3 error-div">
                                 <small *ngIf="addDispensaryForm.get('image').hasError('required') && myform.submitted">Image Required</small>
                             </div>
@@ -60,8 +60,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Phone<span class="mandatory">*</span></label>
-                            <input type="text" formControlName="phone" class="form-control" aria-describedby="Phone" placeholder="Enter Phone" required>
+                            <label>Public Phone Number<span class="mandatory">*</span></label>
+                            <input type="text" formControlName="phone" class="form-control" aria-describedby="Phone" placeholder="Public Phone Number" required>
                             <div class="mb-3 error-div">
                                 <small *ngIf="addDispensaryForm.get('phone').hasError('required') && myform.submitted">Phone Required</small>
                             </div>
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Deal</label>
+                            <label>Current Deal</label>
                             <textarea formControlName="deal" class="form-control" aria-describedby="Deal"></textarea>
                         </div>
                         <div class="form-group">
@@ -137,7 +137,7 @@
                         <div class="form-group" *ngIf="user.role == 1">
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" value="false" class="custom-control-input" formControlName="featured" id="customControlValidation1">
-                                <label class="custom-control-label" for="customControlValidation1">Featured Dispensary</label>
+                                <label class="custom-control-label" for="customControlValidation1">Featured Listing</label>
                             </div>
                         </div>
                     </div>
