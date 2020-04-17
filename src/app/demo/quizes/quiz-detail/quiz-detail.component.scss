@@ -1,5 +1,8 @@
 .question_options {
 	li.true{
-		color: green;
+		color: #5fb377;
+		&::after{
+			content: '*';
+		}
 	}
 }

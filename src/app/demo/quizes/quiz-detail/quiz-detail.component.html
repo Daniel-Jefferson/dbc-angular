@@ -12,8 +12,8 @@
           <h4>{{ this.questionData.question_name }}</h4>
           <div>
           	<ul class="question_options">
-          		<li *ngFor="let option of this.questionData.options" [ngClass]="(option.isAnswer=='true')?'true':'fasle'">{{ option.option_value }}</li>
-          	</ul>
+              <li *ngFor="let option of this.questionData.options" [ngClass]="(option.isAnswer=='true')?'true':'false'">{{ option.option_value }}</li>
+            </ul>
           </div>
         </div>
       </app-card>
