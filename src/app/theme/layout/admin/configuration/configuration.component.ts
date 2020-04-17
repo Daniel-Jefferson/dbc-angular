@@ -232,7 +232,7 @@ export class ConfigurationComponent implements OnInit {
 
   // change main layout
   setLayout(layout) {
-    this.isConfig = true;
+    this.isConfig = false;
     this.setNavbarBackground(this.dattaConfig['nav-back-color']);
     this.setBrandBackground(this.dattaConfig['nav-brand-color']);
     document.querySelector('.pcoded-navbar').classList.remove('menu-light');
