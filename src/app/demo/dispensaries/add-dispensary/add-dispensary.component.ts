@@ -106,7 +106,7 @@ export class AddDispensaryComponent implements OnInit {
       closing_time: ['', [Validators.required]],
       open_day    : ['', [Validators.required]],
       close_day   : ['', [Validators.required]],
-      deal        : []
+      deal        : ['', [Validators.required]]
     })
   }
 
@@ -206,6 +206,7 @@ export class AddDispensaryComponent implements OnInit {
       if (!data['featured']){
         data['featured'] = 'false';
       }
+      // data['subscription_type'] = 'free';
       let admin = JSON.parse(localStorage.getItem('userInfo'));
       data['user_id'] = admin.id;
       this.dispensary.addDispensary(data).then(addResponse => { 
