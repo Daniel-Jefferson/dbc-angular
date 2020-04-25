@@ -62,6 +62,10 @@ const routes: Routes = [
       {
         path: 'admin/vouchers',
         loadChildren: './demo/vouchers/voucher.module#VoucherModule'
+      },
+      {
+        path: 'admin/notification',
+        loadChildren: './demo/notification/notification.module#NotificationModule'
       }
     ]
   },
