@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <app-card cardTitle="Send Notification to users" [options]="false">
+                <form [formGroup]="notificationForm" (ngSubmit) = "onSendNotification()" #myform="ngForm" method="POST">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Notification Title</label>
+                                <input type="text" formControlName="notifyTitle" class="form-control" aria-describedby="Notification Title" placeholder="Enter Notification Title" required>
+                                <div class="mb-3 error-div">
+                                    <small *ngIf="notificationForm.get('notifyTitle').hasError('required') && myform.submitted">Title Required</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Notification Content</label>
+                                <textarea class="form-control" formControlName="notifyContent" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <div class="mb-3 error-div">
+                                    <small *ngIf="notificationForm.get('notifyContent').hasError('required') && myform.submitted">Content Required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </app-card>
+        </div>
+    </div>
+</div>
+
