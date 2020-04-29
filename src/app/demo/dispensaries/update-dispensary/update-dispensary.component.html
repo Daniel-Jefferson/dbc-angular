@@ -90,6 +90,17 @@
                                 <small *ngIf="updateDispensaryForm.get('close_day').hasError('required') && myform.submitted">Closing Day Required</small>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label>Status<span class="mandatory">*</span></label>
+                            <select class="form-control" formControlName="status">
+                                <option value="1">Active</option>
+                                <option value="0">Disable</option>
+                            </select>
+                            <div class="mb-3 error-div">
+                                <small *ngIf="updateDispensaryForm.get('close_day').hasError('required') && myform.submitted">Closing Day Required</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12" style="display: none;">
                         <div class="form-group">

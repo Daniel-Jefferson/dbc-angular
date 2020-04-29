@@ -37,8 +37,8 @@
                             <tr>
                                 <td><b>Status:</b></td>
                                 <td>
-                                    <span *ngIf="dispensaryProfile.status !== '1'" class="badge badge-success">Active</span>
-                                    <span *ngIf="dispensaryProfile.status === '1'" class="badge badge-danger">Disabled</span>
+                                    <span *ngIf="dispensaryProfile.status === 1" class="badge badge-success">Active</span>
+                                    <span *ngIf="dispensaryProfile.status === 0" class="badge badge-danger">Disabled</span>
                                 </td>
                             </tr>
                             <tr>
