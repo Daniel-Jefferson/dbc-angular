@@ -55,6 +55,7 @@ export class UpdateDispensaryComponent implements OnInit {
     close_day     : new FormControl(''),
     dispensary_id : new FormControl(''),
     deal : new FormControl(''),
+    status        : new FormControl('')
   });
 
   constructor(
@@ -92,6 +93,7 @@ export class UpdateDispensaryComponent implements OnInit {
             this.updateDispensaryForm.controls['close_day'].setValue(response['data'][0].timmings.close_day);
             this.updateDispensaryForm.controls['longitude'].setValue(response['data'][0].longitude);
             this.updateDispensaryForm.controls['latitude'].setValue(response['data'][0].latitude);
+            this.updateDispensaryForm.controls['status'].setValue(response['data'][0].status);
           }
         }else{
           console.log(response);
@@ -138,7 +140,8 @@ export class UpdateDispensaryComponent implements OnInit {
       dispensary_id : [''],
       latitude      : [''],
       longitude     : [''],
-      deal          : ['']
+      deal          : [''],
+      status        : ['']
     })
 
   }
