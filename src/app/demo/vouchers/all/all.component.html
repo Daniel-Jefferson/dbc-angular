@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let voucher of this.allVouchers">
-              <td>{{ voucher.first_name }} {{ voucher.last_name }}</td>
+              <td>{{ voucher.full_name }}</td>
               <td>{{ voucher.email }}</td>
               <td>{{ voucher.name }}</td>
               <td *ngIf="voucher.status == 'true'">

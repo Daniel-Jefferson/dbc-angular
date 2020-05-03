@@ -32,9 +32,8 @@ export class UpdateUserComponent implements OnInit {
 
   updateUserForm = new FormGroup({
     username    : new FormControl(''),
-    email       : new FormControl(''), 
-    first_name  : new FormControl(''),
-    last_name   : new FormControl(''),
+    email       : new FormControl(''),
+    full_name  : new FormControl(''),
     phone       : new FormControl(''),
     image       : new FormControl(''),
     user_id     : new FormControl('')
@@ -51,8 +50,7 @@ export class UpdateUserComponent implements OnInit {
     this.updateUserForm = this.formBuilder.group({
       username    : ['', [Validators.required]],
       email       : ['', [Validators.required, Validators.email]],
-      first_name  : ['', [Validators.required]],
-      last_name   : ['', [Validators.required]],
+      full_name   : ['', [Validators.required]],
       phone       : ['', [Validators.required]],
       image       : [null],
       user_id     : ['']
@@ -65,8 +63,7 @@ export class UpdateUserComponent implements OnInit {
             this.userProfile = response['data'][0]; 
             this.updateUserForm.controls['username'].setValue(this.userProfile.username);
             this.updateUserForm.controls['email'].setValue(this.userProfile.email);
-            this.updateUserForm.controls['first_name'].setValue(this.userProfile.first_name);
-            this.updateUserForm.controls['last_name'].setValue(this.userProfile.last_name);
+            this.updateUserForm.controls['full_name'].setValue(this.userProfile.full_name);
             this.updateUserForm.controls['phone'].setValue(this.userProfile.phone);
             this.updateUserForm.controls['image'].setValue(this.userProfile.image); 
             this.updateUserForm.controls['user_id'].setValue(this.userProfile.id);
@@ -87,12 +84,8 @@ export class UpdateUserComponent implements OnInit {
     return this.updateUserForm.get('email');
   }
 
-  get first_name(){
-    return this.updateUserForm.get('first_name');
-  }
-
-  get last_name(){
-    return this.updateUserForm.get('last_name');
+  get full_name(){
+    return this.updateUserForm.get('full_name');
   }
 
   get phone(){

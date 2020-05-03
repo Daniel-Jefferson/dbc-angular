@@ -8,8 +8,7 @@
               <!-- <th>#</th> -->
               <th>Username</th>
               <th>Email</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th>Full Name</th>
               <th>Phone</th>
               <th class="text-right">Actions</th>
             </tr>
@@ -19,8 +18,7 @@
               <!-- <th scope="row">{{ counter + 1 }}</th> -->
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
-              <td>{{ user.first_name }}</td>
-              <td>{{ user.last_name }}</td>
+              <td>{{ user.full_name }}</td>
               <td>{{ user.phone }}</td>
               <td class="text-right">
                 <a (click)="viewUserProfile(user.id)"><i class="feather icon-eye text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="View Profile"></i></a>

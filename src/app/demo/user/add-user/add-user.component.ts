@@ -28,9 +28,8 @@ export class AddUserComponent implements OnInit {
 
   addUserForm = new FormGroup({
     userName    : new FormControl(''),
-    email       : new FormControl(''), 
-    firstName   : new FormControl(''),
-    lastName    : new FormControl(''),
+    email       : new FormControl(''),
+    fullName   : new FormControl(''),
     phone       : new FormControl(''),
     password    : new FormControl(''),
     image       : new FormControl('')
@@ -48,8 +47,7 @@ export class AddUserComponent implements OnInit {
     this.addUserForm = this.formBuilder.group({
       userName    : ['', [Validators.required]],
       email       : ['', [Validators.required, Validators.email]],
-      firstName   : ['', [Validators.required]],
-      lastName    : ['', [Validators.required]],
+      fullName    : ['', [Validators.required]],
       phone       : ['', [Validators.required]],
       password    : ['', [Validators.required]],
       image       : [null]
@@ -64,12 +62,8 @@ export class AddUserComponent implements OnInit {
     return this.addUserForm.get('email');
   }
 
-  get firstname(){
-    return this.addUserForm.get('firstName');
-  }
-
-  get lastname(){
-    return this.addUserForm.get('lastName');
+  get fullname(){
+    return this.addUserForm.get('fullName');
   }
 
   get phone(){
