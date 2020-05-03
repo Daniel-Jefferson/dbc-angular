@@ -30,6 +30,7 @@ export class UpdateDispensaryComponent implements OnInit {
   public dispensaryProfile  : any;
   public uploadAPI          = `${environment.apiUrl}/dispensary/add/image`;
   public dispensaryImage  : any;
+  user: any;
 
   imageTitle = 'budsbankadminpanel';
   public uploader: FileUploader = new FileUploader({
@@ -67,6 +68,8 @@ export class UpdateDispensaryComponent implements OnInit {
     private currentRoute    : ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.user = JSON.parse(localStorage.getItem('userInfo'));
 
     this.currentRoute.params.subscribe(params => {
       this.dispensary.getDispensaryById(params.id).then(response => { 

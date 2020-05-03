@@ -50,13 +50,13 @@
                             </div>
                         </div>
 
-                        <img *ngIf="dispensaryImage !== null" class="img-fluid img-thumbnail img-rounded" src="{{dispensaryImage}}" alt="Listing profile image" width="250" height="250">
-                        <img *ngIf="dispensaryImage === null" class="img-fluid img-thumbnail img-rounded" src="assets/images/admin-user-demo.png" alt="Listing profile image" width="250" height="250">
+                        <img class="img-fluid img-thumbnail img-rounded" [src]="dispensaryImage ? dispensaryImage : 'assets/images/admin-user-demo.png'" width="250" height="250">
 
                         <div class="form-group">
                             <label>Image<span class="mandatory">*</span></label>
                             <input type="file" formControlName="image" class="form-control" aria-describedby="Image" (change)="fileProgress($event)" ng2FileSelect [uploader]="uploader" accept="image/*">
                         </div>
+                        
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
