@@ -91,7 +91,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="user.role == 1">
                             <label>Status<span class="mandatory">*</span></label>
                             <select class="form-control" formControlName="status">
                                 <option value="1">Active</option>
