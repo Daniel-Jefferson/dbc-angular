@@ -143,7 +143,7 @@ export class UpdateDispensaryComponent implements OnInit {
       dispensary_id : [''],
       latitude      : [''],
       longitude     : [''],
-      deal          : [''],
+      deal          : ['', [Validators.required]],
       status        : ['']
     })
 
