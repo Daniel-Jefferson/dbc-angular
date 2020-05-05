@@ -30,6 +30,7 @@ export class UpdateDispensaryComponent implements OnInit {
   public dispensaryProfile  : any;
   public uploadAPI          = `${environment.apiUrl}/dispensary/add/image`;
   public dispensaryImage  : any;
+  user: any;
 
   imageTitle = 'budsbankadminpanel';
   public uploader: FileUploader = new FileUploader({
@@ -55,6 +56,7 @@ export class UpdateDispensaryComponent implements OnInit {
     close_day     : new FormControl(''),
     dispensary_id : new FormControl(''),
     deal : new FormControl(''),
+    status        : new FormControl('')
   });
 
   constructor(
@@ -66,6 +68,8 @@ export class UpdateDispensaryComponent implements OnInit {
     private currentRoute    : ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.user = JSON.parse(localStorage.getItem('userInfo'));
 
     this.currentRoute.params.subscribe(params => {
       this.dispensary.getDispensaryById(params.id).then(response => { 
@@ -92,6 +96,7 @@ export class UpdateDispensaryComponent implements OnInit {
             this.updateDispensaryForm.controls['close_day'].setValue(response['data'][0].timmings.close_day);
             this.updateDispensaryForm.controls['longitude'].setValue(response['data'][0].longitude);
             this.updateDispensaryForm.controls['latitude'].setValue(response['data'][0].latitude);
+            this.updateDispensaryForm.controls['status'].setValue(response['data'][0].status);
           }
         }else{
           console.log(response);
@@ -138,7 +143,8 @@ export class UpdateDispensaryComponent implements OnInit {
       dispensary_id : [''],
       latitude      : [''],
       longitude     : [''],
-      deal          : ['', [Validators.required]]
+      deal          : ['', [Validators.required]],
+      status        : ['']
     })
 
   }

@@ -222,6 +222,15 @@ NavigationItems = [
     classes: 'nav-item'
   },
   {
+    id: 'notification',
+    hidden: (user && user.role === 1 ? false: true),
+    title: 'Send Notification',
+    type: 'item',
+    url: '/admin/notification',
+    icon: 'feather icon-bell',
+    classes: 'nav-item'
+  },
+  {
     id: 'logout',
     title: 'Logout',
     type: 'item',
