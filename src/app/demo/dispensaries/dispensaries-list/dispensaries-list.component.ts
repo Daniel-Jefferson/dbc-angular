@@ -15,17 +15,19 @@ export class DispensariesListComponent implements OnInit {
   public pageSize: number = 10;
   public pageNumber: number = 0;
   public userID: any;
+  public userRole: any;
 
   constructor(private dispensary: DispensariesService, private router: Router) { }
 
   ngOnInit() {
     let admin = JSON.parse(localStorage.getItem('userInfo'));
     this.userID = admin.id;
-    this.loadActiveDispensaries(this.pageNumber, this.pageSize, this.userID);
+    this.userRole = admin.role;
+    this.loadActiveDispensaries(this.pageNumber, this.pageSize, this.userID, this.userRole);
   }
 
-  loadActiveDispensaries(pageNumber: number, pageSize: number, userID: string) {
-    this.dispensary.getActiveDispensaries(pageNumber, pageSize, userID).then(response => { 
+  loadActiveDispensaries(pageNumber: number, pageSize: number, userID: string, userRole: string) {
+    this.dispensary.getActiveDispensaries(pageNumber, pageSize, userID, userRole).then(response => {
       if (response['status'] === 200){
         if (response['data'].length > 0){
           this.allDispensaries = response['data'];
@@ -44,7 +46,7 @@ export class DispensariesListComponent implements OnInit {
   loadNextResults(){
     var pageNumber = this.pageNumber + 10; 
     this.pageNumber = pageNumber; console.log("PageNumber : ", this.pageNumber); console.log("pageSize : ", this.pageSize );
-    this.loadActiveDispensaries(pageNumber, this.pageSize, this.userID);
+    this.loadActiveDispensaries(pageNumber, this.pageSize, this.userID, this.userRole);
   }
 
   loadPrevResults(){ console.log("PageNumber : ", this.pageNumber); console.log("pageSize : ", this.pageSize );
@@ -52,7 +54,7 @@ export class DispensariesListComponent implements OnInit {
       var pageNumber = this.pageNumber - 10;    
       this.pageNumber = pageNumber;
       if (pageNumber >= 0 && this.pageSize >= 0){
-        this.loadActiveDispensaries(pageNumber, this.pageSize, this.userID);
+        this.loadActiveDispensaries(pageNumber, this.pageSize, this.userID, this.userRole);
       }
     }else{
       swal.fire({
@@ -92,7 +94,7 @@ export class DispensariesListComponent implements OnInit {
           text: "Listing disabled successfully",
           showCancelButton: true,
         })
-        this.loadActiveDispensaries(this.pageNumber, this.pageSize, this.userID);
+        this.loadActiveDispensaries(this.pageNumber, this.pageSize, this.userID, this.userRole);
       }
     });
   }
