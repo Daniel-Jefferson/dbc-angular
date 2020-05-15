@@ -13,8 +13,8 @@ export class DispensariesService {
     return this.http.post(`${environment.apiUrl}/dispensary/add`, data).toPromise();
   }
 
-  public getActiveDispensaries(pageNumber: any, pageSize: any, userID: any){
-    return this.http.get(`${environment.apiUrl}/dispensary/all?page=${pageNumber}&size=${pageSize}&userID=${userID}`).toPromise();
+  public getActiveDispensaries(pageNumber: any, pageSize: any, userID: any, userRole: any){
+    return this.http.get(`${environment.apiUrl}/dispensary/all?page=${pageNumber}&size=${pageSize}&userID=${userID}&userRole=${userRole}`).toPromise();
   }
 
   public disableDispensary(data: any){
