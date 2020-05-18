@@ -11,17 +11,17 @@
 
           <div class="form-group">
             <input type="email" class="form-control" placeholder="Email" formControlName="email" required>
-            <div class="error" *ngIf="loginForm.get('email').hasError('required') && myform.submitted">Email Required</div>
-            <div class="error" *ngIf="!loginForm.get('email').hasError('required') && loginForm.get('email').status === 'INVALID' && myform.submitted">Enter a valid email address.</div>
+            <div class="text-danger text-left" *ngIf="loginForm.get('email').hasError('required') && myform.submitted"><small>Email address required</small></div>
+            <div class="text-danger text-left" *ngIf="!loginForm.get('email').hasError('required') && loginForm.get('email').status === 'INVALID' && myform.submitted"><small>Please enter a valid email address.</small></div>
           </div>
 
           <div class="form-group mb-2">
             <input type="password" class="form-control" placeholder="Password" formControlName="password" required>
-            <div class="error" *ngIf="loginForm.get('password').hasError('required') && myform.submitted">Password required.</div>
+            <div class="text-danger text-left" *ngIf="loginForm.get('password').hasError('required') && myform.submitted"><small>Password required.</small></div>
           </div>
 
-          <div class="form-group error" *ngIf="authenticationError && myform.submitted">
-            {{ authenticationError }}
+          <div class="form-group text-danger" *ngIf="authenticationError && myform.submitted">
+            <small>{{ authenticationError }}</small>
           </div>
 
           <button class="btn btn-primary mb-4">Login</button>
