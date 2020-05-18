@@ -44,8 +44,8 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/user/activate`, data).toPromise();
   }
 
-  public getDashboradData(userID: any){
-    return this.http.get(`${environment.apiUrl}/dashboard/data?userID=${userID}`).toPromise();
+  public getDashboradData(userID: any, userRole: any){
+    return this.http.get(`${environment.apiUrl}/dashboard/data?userID=${userID}&userRole=${userRole}`).toPromise();
   }
 
   public updateAdminPassword(data: any){
