@@ -66,7 +66,7 @@ export class AddDispensaryComponent implements OnInit {
   
   ngOnInit() {
 
-    let admin = JSON.parse(localStorage.getItem('userInfo')); console.log(admin);
+    let admin = JSON.parse(localStorage.getItem('userInfo'));
     this.user = admin['name'];
 
     this.mapsAPILoader.load().then(() => {
@@ -233,7 +233,6 @@ export class AddDispensaryComponent implements OnInit {
             }
           }
         }else{ 
-          console.log(addResponse)
           swal.fire('Error', `${addResponse['message']}`, 'error');
         }
       });  

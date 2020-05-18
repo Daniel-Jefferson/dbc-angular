@@ -28,11 +28,9 @@ export class QuizQuestionsComponent implements OnInit {
 
   getAllQuestions(pageNumber: number, pageSize: number){
 		this.quizService.getAllQuestions(pageNumber, pageSize).then( response => { 
-			console.log(response);
 			if (response['status'] === 200){
         if (response['data'].length > 0){
           this.allQuestions = response['data'];
-          console.log(this.allQuestions);
         }else{
           this.allQuestions = null;
         }

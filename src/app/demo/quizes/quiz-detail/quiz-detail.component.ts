@@ -24,12 +24,9 @@ export class QuizDetailComponent implements OnInit {
   ngOnInit() {
     this.currentRoute.params.subscribe(params => {
       this.quizService.getQuestionsbyID(params.id).then(response => { 
-        //console.log(params.id);
         if (response['status'] === 200){
             this.questionData = response['data'];
-            console.log(this.questionData);
         }else{
-          console.log(response);
           swal.fire('Error', 'Question Not Found', 'error');
         }
       });

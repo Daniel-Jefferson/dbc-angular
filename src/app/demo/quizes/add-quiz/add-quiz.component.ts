@@ -95,7 +95,7 @@ export class AddQuizComponent implements OnInit {
     if (!this.addQuizForm.invalid){
       this.showSpinner('spinner1')
       var data = {};
-      data['data'] = this.quizDataToUpload; console.log(data)
+      data['data'] = this.quizDataToUpload;
       
       this.quizService.uploadQuiz(data).then( response => {
         if (response['status'] === 200){

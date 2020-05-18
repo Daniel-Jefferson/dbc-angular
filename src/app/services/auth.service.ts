@@ -11,7 +11,6 @@ export class AuthService {
 
   public isAuthenticated() : Boolean {
     let userData = localStorage.getItem('userInfo');
-    console.log("userData",userData); 
     if(userData && JSON.parse(userData)){
       return true;
     }

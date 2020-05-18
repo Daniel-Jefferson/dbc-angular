@@ -37,7 +37,6 @@ export class ViewDispensaryComponent implements OnInit {
               this.setCurrentLocation(this.dispensaryProfile);
             }
           }else{
-            console.log(response);
             swal.fire('Error', 'Internal Server Error', 'error');
           }
         });
@@ -87,8 +86,6 @@ export class ViewDispensaryComponent implements OnInit {
  
   getAddress(latitude: any, longitude: any) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;

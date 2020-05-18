@@ -28,10 +28,8 @@ export class AdminProfileUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.admin = JSON.parse(localStorage.getItem('userInfo'));
-    console.log(this.admin)
     this.updateAdminForm.controls['name'].setValue(this.admin.name);
     this.updateAdminForm.controls['email'].setValue(this.admin.email);
-    console.log(this.updateAdminForm);
 
     this.updateAdminForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -99,8 +97,6 @@ export class AdminProfileUpdateComponent implements OnInit {
           swal.fire('Error', 'Password should be atleast 6 characters', 'error');
         }else{
           if (passwordValues.prevPassword !== this.admin.password){
-            console.log(passwordValues.prevPassword);
-            console.log(this.admin.password);
             swal.fire('Error', 'Previous password does not match', 'error');
           }else{
             if (passwordValues.newPassword === this.admin.password){

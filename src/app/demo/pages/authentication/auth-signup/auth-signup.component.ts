@@ -61,7 +61,6 @@ export class AuthSignupComponent implements OnInit {
   }
   
   changeCheck(event) {
-    console.log(event.target.checked);
     this.disabledAgreement = event.target.checked;
     if((this.disabledAgreement)){
       this.setAuthenticationError('');
@@ -76,7 +75,6 @@ export class AuthSignupComponent implements OnInit {
     }
 
     this.payment.processPayment(data).then(paymentResponse => {
-      // console.log(paymentResponse)
       if (paymentResponse['status'] === 200) {
         this.data['cardNonce'] = this.hit_nonce;
         this.auth.register(this.data).then(registerResponse => {
@@ -138,7 +136,6 @@ export class AuthSignupComponent implements OnInit {
               this.auth.checkEmail(emailData).then(response => {
                 if (response['status'] === 200) {
 
-                  console.log(this.data);
                    this.auth.register(this.data).then(registerResponse => {
                       if (registerResponse['status'] === 200) {
                         this.auth.setUserInfo(registerResponse['user']);

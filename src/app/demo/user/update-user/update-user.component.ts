@@ -69,7 +69,6 @@ export class UpdateUserComponent implements OnInit {
             this.updateUserForm.controls['user_id'].setValue(this.userProfile.id);
           }
         }else{
-          console.log(response);
           swal.fire('Error', 'Auth Provider is not available', 'error');
         }
       });

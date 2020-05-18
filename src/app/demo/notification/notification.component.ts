@@ -37,7 +37,6 @@ export class NotificationComponent implements OnInit {
     onSendNotification() {
       if (!this.notificationForm.invalid) {
         var data = this.notificationForm.value;
-        console.log(data);
         this.notification.sendNotification(data).then(registerResponse => {
             if (registerResponse['status'] === 200){
                 swal.fire('Success', "Send Notification Successfully", 'success');

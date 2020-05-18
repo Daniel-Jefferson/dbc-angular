@@ -24,7 +24,6 @@ export class ViewUserComponent implements OnInit {
             this.userProfile['created'] = this.formatDate(this.userProfile.created);
           }
         }else{
-          console.log(response);
           swal.fire('Error', 'Internal Server Error', 'error');
         }
       });

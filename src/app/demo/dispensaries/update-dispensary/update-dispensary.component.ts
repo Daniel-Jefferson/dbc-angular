@@ -99,7 +99,6 @@ export class UpdateDispensaryComponent implements OnInit {
             this.updateDispensaryForm.controls['status'].setValue(response['data'][0].status);
           }
         }else{
-          console.log(response);
           swal.fire('Error', `${response['message']}`, 'error');
         }
       });
@@ -161,7 +160,6 @@ export class UpdateDispensaryComponent implements OnInit {
   }
 
   markerDragEnd($event: MouseEvent) {
-    console.log($event);
     this.mapLatitude = $event.coords.lat;
     this.mapLongitude = $event.coords.lng;
     this.getAddress(this.mapLatitude, this.mapLongitude, 1);
@@ -169,8 +167,6 @@ export class UpdateDispensaryComponent implements OnInit {
 
   getAddress(latitude: any, longitude: any, isDrag: any) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
@@ -248,23 +244,15 @@ export class UpdateDispensaryComponent implements OnInit {
   onUpdateDispensarySubmit(){
     if (!this.updateDispensaryForm.invalid){
       var data = this.updateDispensaryForm.value;
-      // data['longitude'] = this.mapLongitude;
-      // data['latitude'] = this.mapLatitude;
 
       data['longitude'] = (!this.mapLongitude) ? this.updateDispensaryForm.value.longitude : this.mapLongitude;
       data['latitude'] = (!this.mapLatitude) ? this.updateDispensaryForm.value.latitude : this.mapLatitude;
       data['formatted_address'] = (!this.changedAddress) ? this.updateDispensaryForm.value.address : this.changedAddress;
 
-      if(!this.changedAddress){
-        console.log('yes');
-      }else{
-        console.log('no');
-      }
-      console.log(data['formatted_address']);
-      console.log(this.updateDispensaryForm.value.address);
       if (!data['featured']){
         data['featured'] = 'false';
       } 
+
       this.dispensary.updateDispensary(data).then(updateResponse => { 
         if (updateResponse['status'] === 200){
           if (this.fileData){ 
@@ -290,7 +278,6 @@ export class UpdateDispensaryComponent implements OnInit {
             // }
           });
         }else{ 
-          console.log(updateResponse)
           swal.fire('Error', `${updateResponse['message']}`, 'error');
         }
       });  
