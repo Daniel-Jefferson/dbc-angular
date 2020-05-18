@@ -113,7 +113,7 @@ export class AuthSignupComponent implements OnInit {
 
   onRegisterSubmit() {
     if(!(this.disabledAgreement)){
-        this.setAuthenticationError('Please Confirm terms and conditions');
+        this.setAuthenticationError('Please confirm that you are at least 21 years old and that you agree to Bud\'s Bank\'s Terms of Use and Privacy Policy.');
     }else{
         if (!this.registerForm.invalid) {
             const name = this.registerForm.get('firstname').value + ' ' +
