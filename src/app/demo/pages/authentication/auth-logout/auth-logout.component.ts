@@ -13,7 +13,6 @@ export class AuthLogoutComponent implements OnInit {
 
   ngOnInit() {
   	this.user = JSON.parse(localStorage.getItem('userInfo'));
-  	// console.log(this.user);
   	if(this.user){
   		localStorage.removeItem('userInfo');
   		this.router.navigateByUrl(`/`);

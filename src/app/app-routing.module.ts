@@ -13,8 +13,7 @@ let uData = JSON.parse(localStorage.getItem('userInfo'));
 if(uData){
   const role = uData.role;
   if (role === "2" || role === 2) {
-    console.log('aaa jaa ywwr');
-   redirectRoute = "admin/dispensary/all"
+    redirectRoute = "admin/dispensary/all"
   } else {
     redirectRoute = "dashboard/default"
   }

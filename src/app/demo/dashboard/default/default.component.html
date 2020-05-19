@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-xl-4" *ngIf="is_adminUser === true">
+  <div class="col-md-4" *ngIf="isAdmin">
     <app-card [hidHeader]="true">
         <h6 class="mb-4">Users</h6>
         <div class="row d-flex align-items-center">
@@ -16,7 +16,7 @@
         </div>
     </app-card>
   </div>
-  <div class="col-md-6 col-xl-4">
+  <div class="col-md-4">
     <app-card [hidHeader]="true">
       <h6 class="mb-4">Listings</h6>
       <div class="row d-flex align-items-center">
@@ -33,15 +33,15 @@
       </div>
     </app-card>
   </div>
-  <div class="col-md-12 col-xl-4" *ngIf="is_adminUser === true">
+  <div class="col-md-4">
     <app-card [hidHeader]="true">
-      <h6 class="mb-4">Questions</h6>
+      <h6 class="mb-4">Vouchers</h6>
       <div class="row d-flex align-items-center">
         <div class="col auto">
           <i class="feather icon-help-circle text-c-green f-30 m-r-10"></i>
         </div>
         <div class="col text-right">
-          <h1 class="f-w-300 d-flex align-items-center  m-b-0">{{ totalQuestions }}</h1>
+          <h1 class="f-w-300 d-flex align-items-center  m-b-0">{{ totalVouchers }}</h1>
         </div>
         
       </div>
@@ -50,7 +50,7 @@
       </div>
     </app-card>
   </div>
-  <div class="col-xl-12 col-md-12" *ngIf="is_adminUser === true">
+  <div class="col-xl-12 col-md-12" *ngIf="isAdmin">
     <app-card cardTitle="Recent Users" cardClass="Recent-Users" blockClass="px-0 py-3">
       <div class="table-responsive">
         <table class="table table-hover">

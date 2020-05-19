@@ -99,7 +99,7 @@ export class AddUserComponent implements OnInit {
   onAddUserSubmit(){
     if (!this.addUserForm.invalid){
       var data = this.addUserForm.value;
-      this.user.register(data).then(registerResponse => { console.log(registerResponse)
+      this.user.register(data).then(registerResponse => { 
         if (registerResponse['status'] === 200){
           if (this.fileData){ 
             this.uploader.onBuildItemForm = (fileItem: any, form: any) => {

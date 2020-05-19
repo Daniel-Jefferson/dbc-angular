@@ -25,7 +25,7 @@ export class QuizListComponent implements OnInit {
     this.getAvailableQuiz(this.pageNumber, this.pageSize);
   }
 
-  getAvailableQuiz(pageNumber: number, pageSize: number){ console.log(pageNumber); console.log(pageSize);
+  getAvailableQuiz(pageNumber: number, pageSize: number){ 
     this.quizService.getAllQuiz(pageNumber, pageSize).then( response => { console.log(response);
       if (response['status'] === 200){
         var tempArray = [];
@@ -51,7 +51,6 @@ export class QuizListComponent implements OnInit {
         // })
       }
       
-      console.log(this.quizes);
     })
   }
 

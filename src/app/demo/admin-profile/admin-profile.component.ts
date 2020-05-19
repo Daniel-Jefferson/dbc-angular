@@ -15,10 +15,8 @@ export class AdminProfileComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService, private user: UserService) { }
 
   ngOnInit() {
-    // let admin = JSON.parse(localStorage.getItem('userInfo'));
     let admin = JSON.parse(localStorage.getItem('userInfo'));
-    console.log(admin.id);
-    this.user.getAdminProfile(admin.id).then( data => { console.log(data['admin']);
+    this.user.getAdminProfile(admin.id).then( data => {
       this.userProfile = data['admin'];
       this.userProfile['updated_at'] = this.formatDate(this.userProfile['updated_at'])
     })

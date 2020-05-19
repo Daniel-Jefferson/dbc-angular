@@ -12,30 +12,35 @@ export class DefaultComponent implements OnInit {
   public totalUsers         :   number = 0;
   public totalDispensaries  :   number = 0;
   public totalQuestions     :   number = 0;
+  public totalVouchers : number = 0;
   public recentUsers        :   any;
-  public is_adminUser    :   any;
+  public isAdmin    :   any;
   public userID: any;
+  public userRole: any;
 
   constructor(private user: UserService) { }
 
   ngOnInit() {
     let admin = JSON.parse(localStorage.getItem('userInfo'));
     this.userID = admin.id;
-    console.log(admin.id);
-    if(admin.id === 1){
-      this.is_adminUser = true;
-      console.log('admin here');
+    this.userRole = admin.role;
+
+    if(this.userRole == 1){
+      // Admin
+      this.isAdmin = true;
     }else{
-      this.is_adminUser = false;
-      console.log('business user here');
-      // window.location.href = '#/admin/dispensary/all';
+      // Business
+      this.isAdmin = false;
     }
-    this.user.getDashboradData(this.userID).then( response => {
+    
+    this.user.getDashboradData(this.userID, this.userRole).then( response => {
       if (response['status'] === 200){
         this.totalUsers = response['data'].allUsers;
         this.totalDispensaries = response['data'].allDispensaries;
         this.totalQuestions = response['data'].allQuestions;
+        this.totalVouchers = response['data'].allVouchers;
         this.recentUsers = response['data'].recentUsers;
+        
         this.recentUsers.forEach( element => {
           element['created'] = this.formatDate(element['created'])
         })

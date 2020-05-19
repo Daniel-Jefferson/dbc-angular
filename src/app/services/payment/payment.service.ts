@@ -12,9 +12,6 @@ export class PaymentService {
   }
 
   public processPayment(payment: any){
-  	console.log('-----------');
-  	console.log('dfdfdfd');
-  	console.log('-----------');
     return this.http.post(`${environment.apiUrl}/process-payment`, payment).toPromise();
   }
 }

@@ -24,8 +24,7 @@ export class DisabledDispensariesComponent implements OnInit {
     this.loadDisabledDispensaries(this.pageNumber, this.pageSize, this.userID);
   }
 
-  loadDisabledDispensaries(pageNumber: any, pageSize: any, userID: string){
-    console.log(userID);
+  loadDisabledDispensaries(pageNumber: any, pageSize: any, userID: string) {
     this.dispensaries.getDisabledDispensaries(pageNumber, pageSize, userID).then(response => { 
       if (response['status'] === 200){
         if (response['data'].length > 0){

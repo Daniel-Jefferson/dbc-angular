@@ -43,13 +43,13 @@ export class DispensariesListComponent implements OnInit {
     })
   }
 
-  loadNextResults(){
+  loadNextResults() {
     var pageNumber = this.pageNumber + 10; 
-    this.pageNumber = pageNumber; console.log("PageNumber : ", this.pageNumber); console.log("pageSize : ", this.pageSize );
+    this.pageNumber = pageNumber;
     this.loadActiveDispensaries(pageNumber, this.pageSize, this.userID, this.userRole);
   }
 
-  loadPrevResults(){ console.log("PageNumber : ", this.pageNumber); console.log("pageSize : ", this.pageSize );
+  loadPrevResults() {
     if (this.pageNumber !== 0){
       var pageNumber = this.pageNumber - 10;    
       this.pageNumber = pageNumber;

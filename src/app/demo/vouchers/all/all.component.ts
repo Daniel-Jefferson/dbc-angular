@@ -23,11 +23,9 @@ export class AllComponent implements OnInit {
 
   getVouchers(pageNumber: number, pageSize: number){
 		this.voucherService.getVoucher(pageNumber, pageSize).then( response => { 
-			console.log(response);
 			if (response['status'] === 200){
 		        if (response['data'].length > 0){
 		          this.allVouchers = response['data'];
-		          console.log(this.allVouchers);
 		        }else{
 		          this.allVouchers = null;
 		        }

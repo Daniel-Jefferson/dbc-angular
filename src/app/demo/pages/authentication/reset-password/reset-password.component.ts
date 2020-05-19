@@ -45,18 +45,13 @@ updatePasswordForm = new FormGroup({
       this.showSpinner('spinner1');
       //const token = this.currentRoute.params.value.id;
       this.currentRoute.params.subscribe(params => { 
-          console.log(params.id);
           this.token = params.id;
       });
 
 
       const password = this.updatePasswordForm.get('password').value;
       const confirm_password = this.updatePasswordForm.get('confirm_password').value;
-      console.log(password);
-      console.log(confirm_password);
       this.auth.updateResetpassword(password, confirm_password, this.token).then(forgetResponse => { 
-      	console.log(forgetResponse);
-      	//var getResponse = JSON.parse(forgetResponse);
         if (forgetResponse['status'] === 200){
           this.hideSpinner('spinner1');
           swal.fire('Success', "Password Reset Successfully", 'success');

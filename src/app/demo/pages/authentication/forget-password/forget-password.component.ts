@@ -38,9 +38,7 @@ resetPasswordForm = new FormGroup({
     if (!this.resetPasswordForm.invalid){
       this.showSpinner('spinner1');
       const email = this.resetPasswordForm.get('email').value;
-      console.log(email);
       this.auth.forgetpassword(email).then(forgetResponse => { 
-      	console.log(forgetResponse);
         // if (loginResponse['status'] === 200){
         //   if (loginResponse['data'].length > 0){
         //     this.auth.setUserInfo(loginResponse['data']);

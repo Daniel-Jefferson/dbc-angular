@@ -25,7 +25,6 @@ export interface Navigation extends NavigationItem {
   children?: NavigationItem[];
 }
 let user = JSON.parse(localStorage.getItem('userInfo'));
-console.log("user",user);
 var NavigationItems = [];
 
 NavigationItems = [
