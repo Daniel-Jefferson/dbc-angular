@@ -42,22 +42,10 @@ export class UpdateDispensaryComponent implements OnInit {
   @ViewChild('search', {'static': true}) 
   public searchElementRef: ElementRef;
 
-  updateDispensaryForm = new FormGroup({
-    featured      : new FormControl(''),
-    name          : new FormControl(''),
-    longitude     : new FormControl(''),
-    latitude      : new FormControl(''),
-    phone         : new FormControl(''),
-    address       : new FormControl(''),
-    image         : new FormControl(''),
-    open_time     : new FormControl(''),
-    close_time    : new FormControl(''),
-    open_day      : new FormControl(''),
-    close_day     : new FormControl(''),
-    dispensary_id : new FormControl(''),
-    deal : new FormControl(''),
-    status        : new FormControl('')
-  });
+  public weekdays           = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  public shortWeekdays      = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  updateDispensaryForm : FormGroup;
 
   constructor(
     private router          : Router, 
@@ -89,14 +77,25 @@ export class UpdateDispensaryComponent implements OnInit {
             this.updateDispensaryForm.controls['address'].setValue(response['data'][0].address);
             this.updateDispensaryForm.controls['deal'].setValue(response['data'][0].deal);
             this.showAddress = response['data'][0].address;
-            // this.updateDispensaryForm.controls['image'].setValue(response['data'][0].image); 
-            this.updateDispensaryForm.controls['open_time'].setValue(response['data'][0].timmings.open_time);
-            this.updateDispensaryForm.controls['close_time'].setValue(response['data'][0].timmings.close_time);
+            // this.updateDispensaryForm.controls['image'].setValue(response['data'][0].image);
             this.updateDispensaryForm.controls['open_day'].setValue(response['data'][0].timmings.open_day);
             this.updateDispensaryForm.controls['close_day'].setValue(response['data'][0].timmings.close_day);
             this.updateDispensaryForm.controls['longitude'].setValue(response['data'][0].longitude);
             this.updateDispensaryForm.controls['latitude'].setValue(response['data'][0].latitude);
             this.updateDispensaryForm.controls['status'].setValue(response['data'][0].status);
+
+            for (let i = 0; i < 7; i++) {
+              this.updateDispensaryForm.controls['opening_time' + i].disable();
+              this.updateDispensaryForm.controls['closing_time' + i].disable();
+            }
+            const time_data = response['data'][0].timmings.time_data;
+            for (let i = 0; i < time_data.length; i++) {
+              const time_object = time_data[i];
+              this.updateDispensaryForm.controls['opening_time' + time_object.weekday].setValue(time_object.open_time);
+              this.updateDispensaryForm.controls['closing_time' + time_object.weekday].setValue(time_object.close_time);
+              this.updateDispensaryForm.controls['opening_time' + time_object.weekday].enable();
+              this.updateDispensaryForm.controls['closing_time' + time_object.weekday].enable();
+            }
           }
         }else{
           console.log(response);
@@ -136,8 +135,6 @@ export class UpdateDispensaryComponent implements OnInit {
       phone         : ['', [Validators.required]],
       address       : ['', [Validators.required]],
       image         : [null],
-      open_time     : ['', [Validators.required]],
-      close_time    : ['', [Validators.required]],
       open_day      : ['', [Validators.required]],
       close_day     : ['', [Validators.required]],
       dispensary_id : [''],
@@ -145,7 +142,17 @@ export class UpdateDispensaryComponent implements OnInit {
       longitude     : [''],
       deal          : ['', [Validators.required]],
       status        : ['']
-    })
+    });
+
+    for (let i = 0; i < this.weekdays.length; i++) {
+      this.updateDispensaryForm.addControl(
+          'opening_time'+i, new FormControl('', [Validators.required])
+      );
+      this.updateDispensaryForm.addControl(
+          'closing_time'+i, new FormControl('', [Validators.required])
+      );
+    }
+
 
   }
   
@@ -157,6 +164,37 @@ export class UpdateDispensaryComponent implements OnInit {
         this.zoom = 8;
         this.getAddress(this.mapLatitude, this.mapLongitude, 0);
       });
+    }
+  }
+
+  onSelectDay() {
+    if (this.open_day.valid && this.close_day.valid) {
+      const startWeekday = this.shortWeekdays.indexOf(this.open_day.value);
+      const endWeekday = this.shortWeekdays.indexOf(this.close_day.value);
+
+      if (startWeekday <= endWeekday) {
+        for (let i = 0; i < 7; i++) {
+          this.updateDispensaryForm.get('opening_time'+i).disable();
+          this.updateDispensaryForm.get('closing_time'+i).disable();
+        }
+        for (let i = startWeekday; i <= endWeekday; i++) {
+          this.updateDispensaryForm.get('opening_time'+i).enable();
+          this.updateDispensaryForm.get('closing_time'+i).enable();
+        }
+      } else {
+        for (let i = 0; i < 7; i++) {
+          this.updateDispensaryForm.get('opening_time'+i).disable();
+          this.updateDispensaryForm.get('closing_time'+i).disable();
+        }
+        for (let i = 0; i <=endWeekday; i++) {
+          this.updateDispensaryForm.get('opening_time'+i).enable();
+          this.updateDispensaryForm.get('closing_time'+i).enable();
+        }
+        for (let i = startWeekday; i < 7; i++) {
+          this.updateDispensaryForm.get('opening_time'+i).enable();
+          this.updateDispensaryForm.get('closing_time'+i).enable();
+        }
+      }
     }
   }
 
@@ -215,14 +253,6 @@ export class UpdateDispensaryComponent implements OnInit {
 
   get image(){
     return this.updateDispensaryForm.get('image');
-  }
-
-  get open_time(){
-    return this.updateDispensaryForm.get('open_time');
-  }
-
-  get close_time(){
-    return this.updateDispensaryForm.get('close_time');
   }
 
   get open_day(){

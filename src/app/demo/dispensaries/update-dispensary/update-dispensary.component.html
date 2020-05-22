@@ -25,18 +25,10 @@
                                 <small *ngIf="updateDispensaryForm.get('name').hasError('required') && myform.submitted">Title Required</small>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label>Opening Time<span class="mandatory">*</span></label>
-                            <input type="time" formControlName="open_time" class="form-control" aria-describedby="Opening Time" placeholder="Enter Opening Time" required>
-                            <div class="mb-3 error-div">
-                                <small *ngIf="updateDispensaryForm.get('open_time').hasError('required') && myform.submitted">Opening Time Required</small>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label>Opening Day<span class="mandatory">*</span></label>
-                            <select class="form-control" formControlName="open_day">
+                            <select class="form-control" formControlName="open_day" (change)="onSelectDay()">
                                 <option value="Mon">Monday</option>
                                 <option value="Tue">Tuesday</option>
                                 <option value="Wed">Wednesday</option>
@@ -68,16 +60,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Closing Time<span class="mandatory">*</span></label>
-                            <input type="time" formControlName="close_time" class="form-control" aria-describedby="Closing Time" placeholder="Enter Closing Time" required>
-                            <div class="mb-3 error-div">
-                                <small *ngIf="updateDispensaryForm.get('close_time').hasError('required') && myform.submitted">Closing Time Required</small>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label>Closing Day<span class="mandatory">*</span></label>
-                            <select class="form-control" formControlName="close_day">
+                            <select class="form-control" formControlName="close_day" (change)="onSelectDay()">
                                 <option value="Mon">Monday</option>
                                 <option value="Tue">Tuesday</option>
                                 <option value="Wed">Wednesday</option>
@@ -115,6 +99,26 @@
                         <div class="form-group">
                             <label>Deal<span class="mandatory">*</span></label>
                             <textarea formControlName="deal" class="form-control" aria-describedby="Deal"></textarea>
+                        </div>
+                        <div class="form-group" *ngIf="open_day.valid && close_day.valid">
+                            <label>Hours<span class="mandatory">*</span></label>
+                            <div class="row" *ngFor="let weekday of this.weekdays; let i = index">
+                                <div class="col-md-4">
+                                    <p class="form-control-sm text-center">{{weekday}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="time" [formControlName]="'opening_time' + i" class="form-control" aria-describedby="Opening Time" placeholder="Opening Time" required/>
+                                    <div class="mb-3 error-div">
+                                        <small *ngIf="updateDispensaryForm.get('opening_time' + i).hasError('required') && myform.submitted">Opening Time Required</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="time" [formControlName]="'closing_time' + i" class="form-control" aria-describedby="Closing Time" placeholder="Closing Time" required/>
+                                    <div class="mb-3 error-div">
+                                        <small *ngIf="updateDispensaryForm.get('closing_time' + i).hasError('required') && myform.submitted">Closing Time Required</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="sub_lable">Subscription<span class="mandatory">*</span></label>
