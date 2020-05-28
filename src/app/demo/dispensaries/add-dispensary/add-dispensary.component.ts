@@ -29,6 +29,9 @@ export class AddDispensaryComponent implements OnInit {
   public uploadedFilePath   : string = null;
   public uploadAPI          = `${environment.apiUrl}/dispensary/add/image`;
 
+  public weekdays           = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  public shortWeekdays      = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
   public user: string;
 
   imageTitle = 'budsbankadminpanel';
@@ -42,20 +45,7 @@ export class AddDispensaryComponent implements OnInit {
   @ViewChild('search', {'static': true}) 
   public searchElementRef: ElementRef;
 
-  addDispensaryForm = new FormGroup({
-    featured      : new FormControl(''),
-    name          : new FormControl(''),
-    longitude     : new FormControl(''),
-    latitude      : new FormControl(''),
-    phone         : new FormControl(''),
-    address       : new FormControl(''),
-    image         : new FormControl(''),
-    opening_time  : new FormControl(''),
-    closing_time  : new FormControl(''),
-    open_day      : new FormControl(''),
-    close_day     : new FormControl(''),
-    deal          : new FormControl(''),
-  });
+  addDispensaryForm: FormGroup;
 
   constructor(
     private router: Router, 
@@ -102,12 +92,19 @@ export class AddDispensaryComponent implements OnInit {
       phone       : ['', [Validators.required]],
       address     : [false, [Validators.required]],
       image       : [null, [Validators.required]],
-      opening_time: ['', [Validators.required]],
-      closing_time: ['', [Validators.required]],
       open_day    : ['', [Validators.required]],
       close_day   : ['', [Validators.required]],
       deal        : ['', [Validators.required]]
-    })
+    });
+
+    for (let i = 0; i < this.weekdays.length; i++) {
+      this.addDispensaryForm.addControl(
+          'opening_time'+i, new FormControl('', [Validators.required])
+      );
+      this.addDispensaryForm.addControl(
+          'closing_time'+i, new FormControl('', [Validators.required])
+      );
+    }
   }
 
   private setCurrentLocation() {
@@ -173,14 +170,6 @@ export class AddDispensaryComponent implements OnInit {
     return this.addDispensaryForm.get('image');
   }
 
-  get opening_time(){
-    return this.addDispensaryForm.get('opening_time');
-  }
-
-  get closing_time(){
-    return this.addDispensaryForm.get('closing_time');
-  }
-
   get open_day(){
     return this.addDispensaryForm.get('open_day');
   }
@@ -195,6 +184,37 @@ export class AddDispensaryComponent implements OnInit {
 
   fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
+  }
+
+  onSelectDay() {
+    if (this.open_day.valid && this.close_day.valid) {
+      const startWeekday = this.shortWeekdays.indexOf(this.open_day.value);
+      const endWeekday = this.shortWeekdays.indexOf(this.close_day.value);
+
+      if (startWeekday <= endWeekday) {
+        for (let i = 0; i < 7; i++) {
+          this.addDispensaryForm.get('opening_time'+i).disable();
+          this.addDispensaryForm.get('closing_time'+i).disable();
+        }
+        for (let i = startWeekday; i <= endWeekday; i++) {
+          this.addDispensaryForm.get('opening_time'+i).enable();
+          this.addDispensaryForm.get('closing_time'+i).enable();
+        }
+      } else {
+        for (let i = 0; i < 7; i++) {
+          this.addDispensaryForm.get('opening_time'+i).disable();
+          this.addDispensaryForm.get('closing_time'+i).disable();
+        }
+        for (let i = 0; i <=endWeekday; i++) {
+          this.addDispensaryForm.get('opening_time'+i).enable();
+          this.addDispensaryForm.get('closing_time'+i).enable();
+        }
+        for (let i = startWeekday; i < 7; i++) {
+          this.addDispensaryForm.get('opening_time'+i).enable();
+          this.addDispensaryForm.get('closing_time'+i).enable();
+        }
+      }
+    }
   }
 
   onAddDispensarySubmit(){
