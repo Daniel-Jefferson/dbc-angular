@@ -4,12 +4,12 @@
             <app-card cardTitle="Update Listing" [options]="false">
                 <label>Enter address<span class="mandatory">*</span></label>
                 <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" value="{{showAddress}}" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
-                <agm-map 
-                    [latitude]="mapLatitude" 
-                    [longitude]="mapLongitude" 
+                <agm-map
+                    [latitude]="mapLatitude"
+                    [longitude]="mapLongitude"
                     [zoom]="zoom" >
-                    <agm-marker 
-                        [latitude]="mapLatitude" 
+                    <agm-marker
+                        [latitude]="mapLatitude"
                         [longitude]="mapLongitude"
                         [markerDraggable]="true"
                         (dragEnd)="markerDragEnd($event)">
@@ -48,7 +48,7 @@
                             <label>Image<span class="mandatory">*</span></label>
                             <input type="file" formControlName="image" class="form-control" aria-describedby="Image" (change)="fileProgress($event)" ng2FileSelect [uploader]="uploader" accept="image/*">
                         </div>
-                        
+
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -99,6 +99,37 @@
                         <div class="form-group">
                             <label>Deal<span class="mandatory">*</span></label>
                             <textarea formControlName="deal" class="form-control" aria-describedby="Deal"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label>Products</label>
+                                <a class="products_add_right" (click)="addProduct()"><i class="feather icon-plus-circle m-r-10" data-toggle="tooltip" data-placement="top" title="View Listing"></i>Add</a>
+                            </div>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngIf="productList.length == 0">
+                                    <td colspan="3" class="text-center">No Products found</td>
+                                </tr>
+                                <tr *ngFor="let product of productList; let i = index">
+                                    <td>
+                                        <img src="{{product.product_image}}" width="45" />
+                                    </td>
+                                    <td>{{product.product_name}}</td>
+                                    <td class="text-right">
+                                        <a (click)="editProduct(i)"><i class="feather icon-edit text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="Edit Listing"></i></a>
+                                        <a (click)="removeProduct(i)">
+                                            <i class="feather icon-trash text-c-green m-r-10" data-toggle="tooltip" data-placement="top" title="Disable Listing"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="form-group" *ngIf="open_day.valid && close_day.valid">
                             <label>Hours<span class="mandatory">*</span></label>
@@ -159,7 +190,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             </app-card>

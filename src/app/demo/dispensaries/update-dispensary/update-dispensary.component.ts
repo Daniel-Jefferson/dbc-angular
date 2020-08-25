@@ -7,6 +7,8 @@ import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../../environments/environment';
 import swal from 'sweetalert2';
 import googlemaps from 'googlemaps';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {AddProductDialogComponent} from '../add-product-dialog/add-product-dialog.component';
 
 @Component({
   selector: 'app-update-dispensary',
@@ -39,35 +41,38 @@ export class UpdateDispensaryComponent implements OnInit {
      allowedFileType: ['image']
   });
 
-  @ViewChild('search', {'static': true}) 
+  @ViewChild('search', {'static': true})
   public searchElementRef: ElementRef;
 
   public weekdays           = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public shortWeekdays      = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  public productList        = [];
+  public removeProductIds   = [];
 
   updateDispensaryForm : FormGroup;
 
   constructor(
-    private router          : Router, 
-    private dispensary      : DispensariesService, 
-    private formBuilder     : FormBuilder, 
-    private mapsAPILoader   : MapsAPILoader, 
-    private ngZone          : NgZone, 
-    private currentRoute    : ActivatedRoute) { }
+    private router          : Router,
+    private dispensary      : DispensariesService,
+    private formBuilder     : FormBuilder,
+    private mapsAPILoader   : MapsAPILoader,
+    private ngZone          : NgZone,
+    private currentRoute    : ActivatedRoute,
+    private dialog          : MatDialog) { }
 
   ngOnInit() {
 
     this.user = JSON.parse(localStorage.getItem('userInfo'));
 
     this.currentRoute.params.subscribe(params => {
-      this.dispensary.getDispensaryById(params.id).then(response => { 
+      this.dispensary.getDispensaryById(params.id).then(response => {
         if (response['status'] === 200){
-          if (response['data'].length > 0){ 
+          if (response['data'].length > 0){
             this.dispensaryProfile = response['data'][0];
-            this.setCurrentLocation(this.dispensaryProfile); 
+            this.setCurrentLocation(this.dispensaryProfile);
             this.updateDispensaryForm.controls['dispensary_id'].setValue(response['data'][0].id);
             if(response['data'][0].featured === true || response['data'][0].featured === 'true'){
-              this.updateDispensaryForm.controls['featured'].setValue(response['data'][0].featured); 
+              this.updateDispensaryForm.controls['featured'].setValue(response['data'][0].featured);
             }
             if(response['data'][0].image){
               this.dispensaryImage = response['data'][0].image;
@@ -96,6 +101,8 @@ export class UpdateDispensaryComponent implements OnInit {
               this.updateDispensaryForm.controls['opening_time' + time_object.weekday].enable();
               this.updateDispensaryForm.controls['closing_time' + time_object.weekday].enable();
             }
+
+            this.productList = response['data'][0]['products'];
           }
         }else{
           swal.fire('Error', `${response['message']}`, 'error');
@@ -105,7 +112,7 @@ export class UpdateDispensaryComponent implements OnInit {
 
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
- 
+
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
@@ -154,7 +161,7 @@ export class UpdateDispensaryComponent implements OnInit {
 
 
   }
-  
+
   private setCurrentLocation(locationToSet: any) {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -219,8 +226,45 @@ export class UpdateDispensaryComponent implements OnInit {
       } else {
         window.alert('Geocoder failed due to: ' + status);
       }
- 
+
     });
+  }
+
+  addProduct() {
+    const dialogRef = this.dialog.open(AddProductDialogComponent, {
+      width: '400px',
+      data: {
+        id: null,
+        dispensary_id: this.dispensary_id.value,
+        product_image: null,
+        product_name: ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.productList.push(result.data);
+      }
+    });
+  }
+
+  editProduct(index) {
+    const dialogRef = this.dialog.open(AddProductDialogComponent, {
+      width: '400px',
+      data: this.productList[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.productList[index] = result.data;
+      }
+    });
+  }
+  removeProduct(index) {
+    if (this.productList[index].id !== null) {
+      this.removeProductIds.push(this.productList[index].id);
+    }
+    this.productList.splice(index, 1);
   }
 
   get dispensary_id(){
@@ -281,18 +325,21 @@ export class UpdateDispensaryComponent implements OnInit {
 
       if (!data['featured']){
         data['featured'] = 'false';
-      } 
+      }
 
-      this.dispensary.updateDispensary(data).then(updateResponse => { 
+      data['product_list'] = this.productList;
+      data['removeProductIds'] = this.removeProductIds;
+
+      this.dispensary.updateDispensary(data).then(updateResponse => {
         if (updateResponse['status'] === 200){
-          if (this.fileData){ 
+          if (this.fileData){
             this.uploader.onBuildItemForm = (fileItem: any, form: any) => {
               form.append('dispensaryId' , updateResponse['data'].dispensaryId);
             }
             this.uploader.uploadAll();
             this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
-              if(response){ 
-                var formatedResponse = JSON.parse(response); 
+              if(response){
+                var formatedResponse = JSON.parse(response);
                 if (formatedResponse['status'] !== 200){
                   swal.fire('Error', `${formatedResponse['message']}`, 'error');
                 }
@@ -307,10 +354,10 @@ export class UpdateDispensaryComponent implements OnInit {
             //   this.router.navigateByUrl('/admin/dispensary/profile');
             // }
           });
-        }else{ 
+        }else{
           swal.fire('Error', `${updateResponse['message']}`, 'error');
         }
-      });  
+      });
     }
   }
 

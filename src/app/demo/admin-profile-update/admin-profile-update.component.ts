@@ -89,7 +89,7 @@ export class AdminProfileUpdateComponent implements OnInit {
       title: 'Change Password',
       showCancelButton: true,
     }).then((result) => {
-      let passwordValues = result.value; 
+      let passwordValues: any = result.value;
       if (passwordValues.newPassword !== passwordValues.confirmPassword){
         swal.fire('Error', 'Confirm Password does not match', 'error');
       }else{

@@ -8,6 +8,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AgmCoreModule } from '@agm/core';
 import { FileUploadModule } from 'ng2-file-upload';
 import swal from 'sweetalert2';
+import {MatDialogModule} from '@angular/material';
 
 @NgModule({
   declarations: [UpdateDispensaryComponent],
@@ -18,6 +19,7 @@ import swal from 'sweetalert2';
     SweetAlert2Module,
     UpdateDispensariesRoutingModule,
     FileUploadModule,
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAcARFFtUPK8IeCXsVmh5I7CIw4hnxejqU',
       libraries: ['places']

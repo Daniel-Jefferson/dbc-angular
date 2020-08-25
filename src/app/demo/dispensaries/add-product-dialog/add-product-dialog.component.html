@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>New Product</h1>
+<div mat-dialog-content>
+	<form>
+		<div class="form-group">
+			<label>Image<span class="mandatory">*</span></label>
+			<input type="file" name="product_image" class="form-control" aria-describedby="Image"
+						 (change)="fileProgress($event)" ng2FileSelect [uploader]="uploader" accept="image/*">
+			<div class="mb-3 error-div">
+				<small *ngIf="image_required">Product Image is Required</small>
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Name<span class="mandatory">*</span></label>
+			<input type="text" name="product_name" class="form-control" placeholder="Enter Title" (change)="changeName()"
+						 [(ngModel)]="data.product_name" required>
+			<div class="mb-3 error-div">
+				<small *ngIf="name_required">Product Name is Required</small>
+			</div>
+		</div>
+	</form>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onNoClick()">Close</button>
+	<button mat-button cdkFocusInitial (click)="onSubmit()">Ok</button>
+</div>
